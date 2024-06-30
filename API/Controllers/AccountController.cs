@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using API.Dtos;
 using API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
@@ -14,8 +15,10 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers
 {
+
+    [Authorize]
     [ApiController]
-    [Route("/api/account")]
+    [Route("/api/user")]
     //api/account
     public class AccountController : ControllerBase
     {
@@ -36,7 +39,7 @@ namespace API.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<string>> Register(RegisterDto registerDto)
         {
@@ -84,6 +87,8 @@ namespace API.Controllers
 
         }
 
+
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<AuthResponseDto>> Login(LoginDto loginDto)
         {
