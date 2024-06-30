@@ -26,7 +26,7 @@ namespace API.Controllers
 
 
         private readonly UserManager<AppUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        // private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
         public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager,
@@ -34,7 +34,7 @@ namespace API.Controllers
         )
         {
             _userManager = userManager;
-            _roleManager = roleManager;
+            // _roleManager = roleManager;
             _configuration = configuration;
         }
 
@@ -204,6 +204,7 @@ namespace API.Controllers
                 id = u.Id,
                 FullName = u.FullName,
                 Roles = _userManager.GetRolesAsync(u).Result.ToArray()
+
             }).ToListAsync();
 
             return Ok(users);
