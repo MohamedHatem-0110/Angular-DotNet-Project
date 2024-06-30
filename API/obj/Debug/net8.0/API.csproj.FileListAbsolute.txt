@@ -140,3 +140,4 @@
 /home/mohamed/Documents/GitHub/Angular-DotNet-Project/API/obj/Debug/net8.0/API.pdb
 /home/mohamed/Documents/GitHub/Angular-DotNet-Project/API/obj/Debug/net8.0/API.genruntimeconfig.cache
 /home/mohamed/Documents/GitHub/Angular-DotNet-Project/API/obj/Debug/net8.0/ref/API.dll
+/home/mohamed/Documents/GitHub/Angular-DotNet-Project/API/bin/Debug/net8.0/System.Security.Permissions.dll
