@@ -3,6 +3,7 @@ using API.Dtos;
 using API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -49,7 +50,33 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RoleResponseDto>>> GetRoles()
         {
-            var roles = await _roleManager.Roles.Select(r => );
+            var roles = await _roleManager.Roles.Select(r => new RoleResponseDto
+            {
+                Id = r.Id,
+                Name = r.Name,
+                TotalUsers = _userManager.GetUsersInRoleAsync(r.Name!).Result.Count
+            }).ToListAsync();
+
+            return Ok(roles);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+
+            if (role is null)
+            {
+                return NotFound("Role not found");
+            }
+
+            var result = await _roleManager.DeleteAsync(role);
+
+            if (result.Succeeded)
+            {
+                return Ok(new { message = "Role deleted successfully" });
+            }
+
+            return BadRequest("Role deletion failed");
         }
     }
 }
